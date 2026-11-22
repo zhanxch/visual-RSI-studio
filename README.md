@@ -15,7 +15,7 @@
 
 要接入仿真器，点 **环境注册**，选择本机 checkout 与 Python。内置支持 LIBERO、LIBERO-Pro、RoboCasa、RoboTwin 2；其他环境可用同一份清单协议接入。LIBERO 与 LIBERO-Pro 已验证重置与取帧，另两个已核对入口，尚待完整仿真验证。[环境与 Board 使用指南](docs/rsi-board.md)
 
-Studio 现名 **visual RSI studio**；LinkMind 保留为独立研究方案名称。仓库地址、插件标识与存储路径暂沿用旧值，兼容已有安装和会话。
+Studio 现名 **visual RSI studio**，仓库已更名为 `visual-RSI-studio`（旧地址自动跳转）。LinkMind 指独立的研究仓库 [embodied-infra-half-life](https://github.com/zhanxch/embodied-infra-half-life)。插件标识与存储路径暂沿用旧值，兼容已有安装和会话。为什么要做成一个完整的 Studio，而不只是插件：见 [essay](docs/essay.md)（English）。
 
 这是开发预览 `0.12.0`，当前验证环境为 **Linux x64 + DSH 0.2.2-rc.2**。它不是新的控制算法，也不自动完成任意仓库的复现。
 
@@ -47,15 +47,15 @@ Studio 现名 **visual RSI studio**；LinkMind 保留为独立研究方案名称
 先准备独立的 Python MCP 环境：
 
 ```bash
-git clone https://github.com/zhanxch/deepseek-harness-LinkMind.git
-cd deepseek-harness-LinkMind
+git clone https://github.com/zhanxch/visual-RSI-studio.git
+cd visual-RSI-studio
 python3 -m venv "$HOME/.local/share/linkmind-studio/python"
 "$HOME/.local/share/linkmind-studio/python/bin/python" -m pip install -r requirements.txt
 ```
 
 然后通过 DSH 自带的插件管理器安装此仓库目录：
 
-> 安装 visual RSI studio 插件：用 plugin_manager 的 install_bundle，target 传刚下载的 deepseek-harness-LinkMind 目录的绝对路径。安装后彻底退出并重新打开 DSH。
+> 安装 visual RSI studio 插件：用 plugin_manager 的 install_bundle，target 传刚下载的 visual-RSI-studio 目录的绝对路径。安装后彻底退出并重新打开 DSH。
 
 也可以在完全退出 DSH 后使用它的 CLI，**profile 和 DSH_HOME 必须对应平时使用的应用**：
 
@@ -164,7 +164,7 @@ API 方案可在 recipe 中设置 `"conversation": {"format": "linkmind-events",
 - 源码追溯记录 Git HEAD、tracked diff 和未跟踪文件的哈希，不打包权重、被忽略资产或完整环境。退出码 0 也不等于任务成功。
 - 配置编辑器保护未保存草稿和并发修改；它是启动 JSON 编辑器，源码查看仍使用 DSH 原生文件功能。
 
-若需要 DSH 会话直接控制 LinkMind 内置仿真，可在设置中指定另行配置好的完整 [Studio 集成开发分支](https://github.com/zhanxch/LinkMind/tree/feat/dsh-embodied-studio) checkout（`root`）及 Python。目前该集成仍在开发分支，不能直接使用 LinkMind 的 `main` 代替。该可选路线需要仿真资产和依赖，详见[上游 Studio 文档](https://github.com/zhanxch/LinkMind/blob/feat/dsh-embodied-studio/docs/studio-projects.md)。`codex` 设置也是可选的实验适配器，默认关闭，不改变 DSH 默认模型。该适配器在已有会话中切换模型可能受上下文压缩限制；可以新建会话、选择模型，再接续同一任务。
+若需要 DSH 会话直接控制 LinkMind 内置仿真，可在设置中指定另行配置好的完整 [Studio 集成开发分支](https://github.com/zhanxch/embodied-infra-half-life/tree/feat/dsh-embodied-studio) checkout（`root`）及 Python。目前该集成仍在开发分支，不能直接使用 LinkMind 的 `main` 代替。该可选路线需要仿真资产和依赖，详见[上游 Studio 文档](https://github.com/zhanxch/embodied-infra-half-life/blob/feat/dsh-embodied-studio/docs/studio-projects.md)。`codex` 设置也是可选的实验适配器，默认关闭，不改变 DSH 默认模型。该适配器在已有会话中切换模型可能受上下文压缩限制；可以新建会话、选择模型，再接续同一任务。
 
 ## 开发与验证
 
